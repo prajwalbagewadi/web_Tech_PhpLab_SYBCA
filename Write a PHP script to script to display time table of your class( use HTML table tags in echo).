@@ -1,0 +1,54 @@
+<?php 
+// use arrays :Associative Arrays
+//These types of arrays are similar to the indexed arrays but 
+//instead of linear storage, every value can be assigned with a user-defined key of string type.
+
+$Days=array("mon"=>array("8amTo9am"=>"S|E","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech")
+,"tue"=>array("8amTo9am"=>"Python","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech")
+,"wed"=>array("8amTo9am"=>"S|E","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech")
+,"thu"=>array("8amTo9am"=>"S|E","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech")
+,"fri"=>array("8amTo9am"=>"S|E","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech")
+,"sat"=>array("8amTo9am"=>"S|E","9amTo10am"=>"Cpp","10amTo11am"=>"Webtech"));
+
+echo("<table border=\"1\">");
+
+echo("<tr>");
+$d=array_keys($Days);
+for($i=0;$i<6;$i++)
+{
+    echo("<th>");
+    echo($d[$i]);
+    echo("</th>");
+}
+echo("</tr>");
+
+echo("<tr>");
+foreach($Days as $d=>$c)
+{
+    echo("<td>");
+    echo($c["8amTo9am"]);
+    echo("</td>");
+}
+echo("</tr>");
+
+echo("<tr>");
+foreach($Days as $d=>$c)
+{
+    echo("<td>");
+    echo($c["9amTo10am"]);
+    echo("</td>");
+}
+echo("</tr>");
+
+echo("<tr>");
+foreach($Days as $d=>$c)
+{
+    echo("<td>");
+    echo($c["10amTo11am"]);
+    echo("</td>");
+}
+echo("</tr>");
+
+echo("</table>");
+
+?>
