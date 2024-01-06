@@ -1,0 +1,43 @@
+<html>
+<head></head>
+<body>
+    <form method="$_GET">
+        <pre>
+        student_name:<input type="text" name="name"/>
+        <br>
+        student_class:<input type="text" name="class"/>
+        <br>
+        student_roll_no:<input type="text" name="roll_no"/>
+        <br>
+        <button name="submit" value="submit">submit</button> 
+        </pre>
+    </form> 
+    <?php
+    
+    if(isset($_GET['submit']))
+    {
+        class stud 
+        {
+            public $name;
+            public $class;
+            public $roll_no;
+
+             public function get()
+             {
+                $this->name=$_GET['name'];
+                $this->class=$_GET['class'];
+                $this->roll_no=$_GET['roll_no'];
+             }
+
+        }
+        
+        $stud1= new stud();
+        $stud1->get(); 
+        echo "<h2>Name:{$stud1->name}</h2>";
+        echo "<h2>Class:{$stud1->class}</h2>";
+        echo "<h2>Roll_no:{$stud1->roll_no}</h2>";
+    }
+
+    ?>
+</body>
+</html>    
