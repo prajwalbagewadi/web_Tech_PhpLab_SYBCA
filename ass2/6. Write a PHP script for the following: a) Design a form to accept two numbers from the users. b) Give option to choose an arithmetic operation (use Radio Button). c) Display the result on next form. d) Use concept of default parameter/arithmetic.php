@@ -17,16 +17,16 @@ function arithmetic_operation($num1=10,$num2=20,$op="+"){
             echo "sum of $num1 + $num2=".($num1+$num2);
             break;
         case '-':
-            echo "sum of $num1 - $num2=".($num1-$num2);
+            echo "sub of $num1 - $num2=".($num1-$num2);
             break; 
         case '*':
-            echo "sum of $num1 * $num2=".($num1*$num2);
+            echo "multi of $num1 * $num2=".($num1*$num2);
             break;
         case '/':
-            echo "sum of $num1 / $num2=".($num1/$num2);
+            echo "div of $num1 / $num2=".($num1/$num2);
             break; 
         case '%':
-            echo "sum of $num1 % $num2=".($num1%$num2);
+            echo "mod of $num1 % $num2=".($num1%$num2);
             break;              
     }
 }
