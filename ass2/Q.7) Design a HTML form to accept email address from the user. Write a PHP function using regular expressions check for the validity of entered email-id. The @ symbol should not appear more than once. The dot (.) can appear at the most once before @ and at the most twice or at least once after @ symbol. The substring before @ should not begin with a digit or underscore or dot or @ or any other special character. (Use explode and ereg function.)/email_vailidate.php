@@ -69,7 +69,7 @@ function email_vaildate($email){
          echo "invalid email=".$email."<br>";
       }
       /*
-         This function searches string for pattern, returns true if pattern exists, otherwise returns false. 
+         int preg_match()This function searches string for pattern, returns true if pattern exists, otherwise returns false. 
          Usually search starts from beginning of subject string. 
         
          Syntax:
