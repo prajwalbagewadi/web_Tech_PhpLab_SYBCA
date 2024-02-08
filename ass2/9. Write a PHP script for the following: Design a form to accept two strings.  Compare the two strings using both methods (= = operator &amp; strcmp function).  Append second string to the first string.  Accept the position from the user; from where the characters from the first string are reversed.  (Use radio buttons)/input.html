@@ -1,0 +1,20 @@
+<html>
+  <head></head>
+  <body>
+    <form action="stringop.php" method="POST">
+      <label><b>string operations</b></label><br><br>
+      <label>imput_String1:</label><input type="text" name="istr1"/><br>
+      <label>imput_String2:</label><input type="text" name="istr2"/><br>
+      <label>operations:</label><br>
+      <input type="radio" name="op" value="=="><label>==</label><br>
+      <!-- <input type="radio" name="op" value="&"><label>&amp</label><br> -->
+      <input type="radio" name="op" value="strcmp"><label>strcmp</label><br>
+      <label>Append second string to the first string:</label><br>
+      <input type="radio" name="op" value="append"><label>append</label><br>
+      <label>Enter a postition from which to reverse the first string:</label><br>
+      <input type="radio" name="op" value="reverse"><label>reverse</label><br>
+      <label>enter Position to reverse from:</label><input type="text" name="val_rev"/><br>
+      <input type="submit" name="submit"/>
+    </form>
+  </body>
+</html>
