@@ -1,0 +1,23 @@
+<!-- 
+  4. Declare a Multidimensional Array. Display specific element from a Multidimensional
+array. Also delete given element from the Multidimensional array. (After each
+operation display array content.
+ -->
+<html>
+    <head></head>
+    <body>
+        <form action="multi_arr.php" method="POST">
+            <label>Multidimensional array operations:</label><br>
+
+            <input type="radio" name="op" value="display"><label>Display array:</label><br>
+
+            <input type="radio" name="op" value="select_disp"><label>Display Selected element:</label><br>
+            <label>Enter row and col seperated by Space:</label><br><input style="width: 70px;" type="text" placeholder="Row_col" name="row_col1"/><br>
+
+            <input type="radio" name="op" value="delete_selected"><label>Delete Selected element:</label><br>
+            <label>Enter row and col seperated by Space:</label><br><input style="width: 70px;" type="text" placeholder="Row_col" name="row_col2"/><br>
+
+            <input type="submit" name="submit"/>
+        </form>
+    </body>
+</html>
