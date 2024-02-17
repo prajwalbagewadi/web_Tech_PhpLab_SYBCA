@@ -18,8 +18,8 @@ echo "op=".$op;
 function specific_disp($row,$col){
     global $multi_arr;
     global $N;
-    if($row>=0 && $row<=$N){
-        if($col>=0 && $col<=$N){
+    if($row>=0 && $row<$N){
+        if($col>=0 && $col<$N){
             echo "<br>"."Display selected array_Element:"."<br>";
             echo '$multi_arr'."[$row][$col]".$multi_arr[$row][$col]."<br>";
             disp_arr();
