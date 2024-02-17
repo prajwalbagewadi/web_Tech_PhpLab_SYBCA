@@ -35,14 +35,19 @@ function specific_disp($row,$col){
 }  
 
 // delete specific element
-function specific_delete($row,$col){
+function specific_delete($element){
     global $N;
-    if($row>=0 && $row<=$N){
-        if($col>=0 && $col<=$N){
-            global $multi_arr;
-            $var=$multi_arr[$row][$col];
-            echo "<br>"."Delete specified postion array_Element:"."<br>";
-            echo "element pos=".$row." ".$col." element=".$var." deleted"."<br>";
+    global $multi_arr;
+    echo "<br>"."Delete specified array_Element:"."<br>";
+            for($i=0;$i<$N;$i++){
+                for($j=0;$j<$N;$j++){
+                    if($multi_arr[$i][$j]==$element){
+                        unset($multi_arr[$i][$j]);
+                    }
+                }
+                echo "<br>";
+            }
+           
             /*
                 To delete an element from an array in PHP, you can use the unset() function:
                 unset($array[3])
@@ -53,12 +58,9 @@ function specific_delete($row,$col){
                 If the index doesn't exist, the function skips the procedure. 
                 The result array will not be reindexed after using the unset() function. 
             */
-                unset($multi_arr[$row][$col]);
-                disp_arr();
-        }
-    }
-    
+            disp_arr();    
 }
+           
 
 // disp array
 function disp_arr(){
@@ -86,9 +88,9 @@ switch($op){
         specific_disp($var[0],$var[1]);
         break;
     case 'delete_selected':
-        $var1=explode(" ",$_POST['row_col2']);
-        echo "pos for delete=".$var1[0].$var1[1]."<br>";
-        specific_delete($var1[0],$var1[1]);
+        $var1=$_POST['val'];
+        echo "element to delete=".$var1."<br>";
+        specific_delete($var1);
         break;        
 }
 ?>
