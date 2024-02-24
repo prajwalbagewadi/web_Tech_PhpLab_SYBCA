@@ -1,0 +1,39 @@
+<!-- 
+2) Write a PHP script to create a Class shape and its subclass triangle, square and display area of the
+selected shape (Use the concept of Inheritance). Display menu (use radio button)
+a) Triangle
+b) Square
+c) Rectangle
+d) Circle
+ -->
+ <html>
+    <body>
+        <form action="quest2.php" method="POST">
+            <label>Shape area:</label>
+            <br>
+            <label>Triangle</label>
+            <input type="radio" name="op" value="triangle"/>
+            <input type="text" name="base" placeholder="BASE"/>
+            <input type="text" name="height" placeholder="HEIGHT"/>
+            <br>
+            <br>
+            <label>Square</label>
+            <input type="radio" name="op" value="square"/>
+            <input type="text" name="side" placeholder="SIDE"/>
+            <br>
+            <br>
+            <label>Rectangle</label>
+            <input type="radio" name="op" value="rectangle"/>
+            <input type="text" name="length" placeholder="LENGTH"/>
+            <input type="text" name="width" placeholder="WIDTH"/>
+            <br>
+            <br>
+            <label>Circle</label>
+            <input type="radio" name="op" value="circle"/>
+            <input type="text" name="radius" placeholder="RADIUS"/>
+            <br>
+            <input type="submit" name="submit"/>
+            <input type="reset" name="reset"/>
+        </form>
+    </body>
+</html>
