@@ -1,0 +1,32 @@
+<!-- 
+3) Write class declarations and member function definitions for Teacher (code, name, qualification).
+Derive teach_account(account_no,joining_date) from Teacher and teach_sal(basic_pay, earnings,
+deduction) from teach_account. Write a menu driven program
+a) To build a master table
+b) To sort all entries
+c) To search an entry
+d) Display salary of all teachers.
+-->
+<html>
+    <body>
+        <form action="quest3.php" method="POST">
+            <label>TEACHER PANEL</label>
+            <br>
+            <input type="radio" name="op" value="Master"/>
+            <label>SHOW MASTER TABLE</label>
+            <br>
+            <input type="radio" name="op" value="sort"/>
+            <label>SORT ENTRIES</label>
+            <br>
+            <input type="radio" name="op" value="search"/>
+            <label>SEARCH ENTRIES</label>
+            <input type="text" name="key" placeholder="ENTER TEACHER NAME"/>
+            <br>
+            <input type="radio" name="op" value="salary"/>
+            <label>SHOW SALARY'S</label>
+            <br>
+            <input type="submit" name="submit"/>
+            <input type="reset" name="reset"/>
+        </form>
+    </body>
+</html>
