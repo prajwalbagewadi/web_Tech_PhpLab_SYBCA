@@ -1,0 +1,46 @@
+<!-- 
+5) Create a class account (accno, cust_name). Derive two classes from account as
+saving_acc(balance, min_amount) and current_acc(balance, min_amount).
+Display a menu
+a) Saving Account
+b) Current Account
+For each of this display a menu with the following options.
+1. Create account
+2. Deposit
+3. Withdrawal
+-->
+<html>
+    <body>
+        <form action="bank.php" method="POST">
+            <label>SBI BANK PAGE</label>
+            <br>
+            <label><h1>Saving Account</h1></label>
+            <input type="radio" name="op" value="saving_acc" style="position:relative"/>
+            <br>
+            <label><h3>Create Account</h3></label>
+            <input type="radio" name="sa" value="create_acc"/>
+            <br>
+            <label><h3>Deposit</h3></label>
+            <input type="radio" name="sa" value="Deposit"/>
+            <br>
+            <label><h3>Withdrawal</h3></label>
+            <input type="radio" name="sa" value="Withdrawal"/>
+            <br>
+            <br>
+            <label><h1>Current Account</h1></label>
+            <input type="radio" name="op" value="current_acc"/>
+            <br>
+            <label><h3>Create Account</h3></label>
+            <input type="radio" name="ca" value="create_acc"/>
+            <br>
+            <label><h3>Deposit</h3></label>
+            <input type="radio" name="ca" value="Deposit"/>
+            <br>
+            <label><h3>Withdrawal</h3></label>
+            <input type="radio" name="ca" value="Withdrawal"/>
+            <br><br>
+            <input type="submit" name="submit">
+            <input type="reset" name="reset">
+        </form>
+    </body>
+</html>
