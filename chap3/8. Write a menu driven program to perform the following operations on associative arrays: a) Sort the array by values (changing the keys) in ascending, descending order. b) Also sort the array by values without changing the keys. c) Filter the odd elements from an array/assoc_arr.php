@@ -48,7 +48,7 @@ switch($op){
             echo "original array:"."<br>";
             print_r($subjects);
             //method 
-            asort($subjects);
+            ksort($subjects);
             echo "<br>";
             echo "without changing the keys. ascending, result array:"."<br>";
             print_r($subjects);
