@@ -10,13 +10,13 @@ d) Find set difference of two arrays.
 $op=$_POST['op'];
 
 //array declarations
-$arr1=array("apple","orange","grapes","pineapple");
-$arr2=array("mango","tomato","potato","pineapple","grapes");
+$arr1=array("fruit-1"=>"apple","fruit-2"=>"orange","fruit-3"=>"grapes","fruit-4"=>"pineapple");
+$arr2=array("fruit-5"=>"mango","vegatable-1"=>"tomato","vegatable-2"=>"potato","fruit-6"=>"pineapple","fruit-7"=>"grapes");
 
 //display function
 function disp($arr){
-    foreach($arr as $val){
-        echo "$val"."  ";
+    foreach($arr as $key=>$val){
+        echo "key=$key"."  "."val=$val";
     }
     echo "<br>";
 }
