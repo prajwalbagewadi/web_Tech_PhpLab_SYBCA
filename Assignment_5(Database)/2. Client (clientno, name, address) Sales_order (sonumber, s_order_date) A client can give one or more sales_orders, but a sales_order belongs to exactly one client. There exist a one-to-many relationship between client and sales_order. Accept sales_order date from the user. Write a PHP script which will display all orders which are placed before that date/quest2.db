@@ -1,0 +1,126 @@
+<!-- 
+2. Client (clientno, name, address)
+Sales_order (sonumber, s_order_date)
+A client can give one or more sales_orders, but a sales_order belongs to exactly one client.
+There exist a one-to-many relationship between client and sales_order.
+Accept sales_order date from the user. Write a PHP script which will display all orders which are
+placed before that date.
+ -->
+
+<database>
+<user>postgres</user>
+<password>123456</password>
+
+hp@hp-Presario-CQ58-Notebook-PC:~$ psql -h localhost -p 5432 -U postgres -d sales_orders
+Password for user postgres: 
+psql (12.18 (Ubuntu 12.18-0ubuntu0.20.04.1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+sales_orders=# 
+
+sales_orders=# create table client(cno int primary key,name varchar(50),address text);
+CREATE TABLE
+sales_orders=# select * from client;
+ cno | name | address 
+-----+------+---------
+(0 rows)
+
+sales_orders=# create table sale_order(so_num int primary key,s_order_date date);
+CREATE TABLE
+sales_orders=# select * from sale_order;
+ so_num | s_order_date 
+--------+--------------
+(0 rows)
+
+sales_orders=# create table sale_client(cno int references client(cno),so_num int references sale_order(so_num));
+CREATE TABLE
+sales_orders=# select * from sale_client;
+ cno | so_num 
+-----+--------
+(0 rows)
+
+sales_orders=# insert into client values(1,'neha','pimpri pune');
+INSERT 0 1
+sales_orders=# insert into client values(2,'divya','shivaji_nagar  pune');
+INSERT 0 1
+sales_orders=# insert into client values(3,'soniya','pimpri pune');
+INSERT 0 1
+sales_orders=# select * from client;
+ cno |  name  |       address       
+-----+--------+---------------------
+   1 | neha   | pimpri pune
+   2 | divya  | shivaji_nagar  pune
+   3 | soniya | pimpri pune
+(3 rows)
+
+sales_orders=# insert into sale_order values(1,'2024-03-09');
+INSERT 0 1
+sales_orders=# insert into sale_order values(2,'2024-03-03');
+INSERT 0 1
+sales_orders=# insert into sale_order values(3,'2024-03-02');
+INSERT 0 1
+sales_orders=# insert into sale_order values(4,'2024-03-01');
+INSERT 0 1
+sales_orders=# select * from sale_order;
+ so_num | s_order_date 
+--------+--------------
+      1 | 2024-03-09
+      2 | 2024-03-03
+      3 | 2024-03-02
+      4 | 2024-03-01
+(4 rows)
+
+sales_orders=# insert into sale_client values(1,1);
+INSERT 0 1
+sales_orders=# insert into sale_client values(2,2);
+INSERT 0 1
+sales_orders=# insert into sale_client values(3,2);
+INSERT 0 1
+sales_orders=# insert into sale_client values(3,3);
+INSERT 0 1
+sales_orders=# insert into sale_client values(3,4);
+INSERT 0 1
+sales_orders=# select * from sale_client;
+ cno | so_num 
+-----+--------
+   1 |      1
+   2 |      2
+   3 |      2
+   3 |      3
+   3 |      4
+(5 rows)
+
+sales_orders=# delete from sale_client where cno=3 and so_num=2;
+DELETE 1
+sales_orders=# select * from sale_client;
+ cno | so_num 
+-----+--------
+   1 |      1
+   2 |      2
+   3 |      3
+   3 |      4
+(4 rows)
+
+<query>
+sales_orders=# select sale_order.*,client.cno,name from sale_order,client,sale_client where sale_order.so_num=sale_client.so_num and client.cno=sale_client.cno and sale_order.s_order_date < '2024-03-09';
+ so_num | s_order_date | cno |  name  
+--------+--------------+-----+--------
+      2 | 2024-03-03   |   2 | divya
+      3 | 2024-03-02   |   3 | soniya
+      4 | 2024-03-01   |   3 | soniya
+(3 rows)
+</query>
+<query>
+sales_orders=# select sale_order.*,client.cno,name from sale_order,client,sale_client where sale_order.so_num=sale_client.so_num and client.cno=sale_client.cno and sale_order.s_order_date <= '2024-03-09';
+ so_num | s_order_date | cno |  name  
+--------+--------------+-----+--------
+      1 | 2024-03-09   |   1 | neha
+      2 | 2024-03-03   |   2 | divya
+      3 | 2024-03-02   |   3 | soniya
+      4 | 2024-03-01   |   3 | soniya
+(4 rows)
+</query>
+
+
+</database>
