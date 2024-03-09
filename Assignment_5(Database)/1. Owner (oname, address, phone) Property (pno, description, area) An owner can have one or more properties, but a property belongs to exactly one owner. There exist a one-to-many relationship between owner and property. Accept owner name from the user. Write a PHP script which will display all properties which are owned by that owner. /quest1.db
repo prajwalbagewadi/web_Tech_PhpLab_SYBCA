@@ -1,0 +1,89 @@
+user=postgres password=123456
+
+postgres=# create database prop;
+CREATE DATABASE
+postgres=# \c prop;
+You are now connected to database "prop" as user "postgres".
+prop=#
+
+prop=# create table property(pno int primary key, description text,area float);
+CREATE TABLE
+prop=# create table owner(oname varchar(50) primary key,address text,phone numeric(10));
+CREATE TABLE
+prop=# create table po(oname varchar(50) references owner(oname),pno int references property(pno));
+CREATE TABLE
+prop=#
+
+prop=# insert into property values(1,'The Newport',2404.0);
+INSERT 0 1
+prop=# insert into property values(2,'The squire',3477.0);
+INSERT 0 1
+prop=# insert into property values(3,'The afton',2075.0);
+INSERT 0 1
+
+prop=# select * from property;
+ pno | description | area 
+-----+-------------+------
+   1 | The Newport | 2404
+   2 | The squire  | 3477
+   3 | The afton   | 2075
+(3 rows)
+
+prop=# insert into property values(4,'The antilia',4075.0);
+INSERT 0 1
+prop=# select * from property;
+ pno | description | area 
+-----+-------------+------
+   1 | The Newport | 2404
+   2 | The squire  | 3477
+   3 | The afton   | 2075
+   4 | The antilia | 4075
+(4 rows)
+
+
+prop=# insert into owner values('pooja','47 W 13th St, New York, NY 10011, USA',7498957937);
+INSERT 0 1
+prop=# insert into owner values('prajwal','69 W 9th St, New York, NY 10011, USA',7498957937);
+INSERT 0 1
+prop=# insert into owner values('kajal','181 Mercer Street, New York, NY 10012, United States',7498957937);
+INSERT 0 1
+prop=# select * from owner;
+  oname  |                       address                        |   phone    
+---------+------------------------------------------------------+------------
+ pooja   | 47 W 13th St, New York, NY 10011, USA                | 7498957937
+ prajwal | 69 W 9th St, New York, NY 10011, USA                 | 7498957937
+ kajal   | 181 Mercer Street, New York, NY 10012, United States | 7498957937
+(3 rows)
+
+prop=# insert into po values('pooja',1);
+INSERT 0 1
+prop=# insert into po values('prajwal',2);
+INSERT 0 1
+prop=# insert into po values('kajal',3);
+INSERT 0 1
+prop=# select * from po;
+  oname  | pno 
+---------+-----
+ pooja   |   1
+ prajwal |   2
+ kajal   |   3
+(3 rows)
+
+prop=# 
+prop=# insert into po values('prajwal',4);
+INSERT 0 1
+prop=# select * from po;
+  oname  | pno 
+---------+-----
+ pooja   |   1
+ prajwal |   2
+ kajal   |   3
+ prajwal |   4
+(4 rows)
+
+prop=# select property.*,owner.oname from property,owner,po where owner.oname=po.oname and property.pno=po.pno and po.oname='prajwal';
+ pno | description | area |  oname  
+-----+-------------+------+---------
+   2 | The squire  | 3477 | prajwal
+   4 | The antilia | 4075 | prajwal
+(2 rows)
