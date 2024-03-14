@@ -1,0 +1,114 @@
+<!-- 
+4. Project (pno, pname, pduration, pbudget)
+a. You have already created relation Emp in Q-3. There exists a many-to-many relationship
+between Emp and Project, with descriptive attribute no_of_hrs_worked.
+b. Accept project name from the user. Write a PHP script which will display all employees
+working on that project along with number of hours they worked on it.
+ -->
+
+create table emp(eno int primary key,ename varchar(50),post varchar(50));
+
+
+insert into emp(eno,ename,post) values(1,'prajwal','SDE-3'),(2,'aditya','team-lead'),(3,'ashutosh','SDE-3');
+
+create table project(pno int primary key,pname varchar(50),pduration int,pbudget float);
+
+insert into project(pno,pname,pduration,pbudget) values(1,'google-Gen-AI',2190,70000),(2,'youtube-recommend',2500,50000);
+
+postgres=# create database project;
+CREATE DATABASE
+postgres=# \c project;
+Password: 
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "project" as user "postgres".
+project=# create table emp(eno int primary key,ename varchar(50),post varchar(50));
+CREATE TABLE
+project=# insert into values(1,'prajwal','SDE-3'),(2,'aditya','team-lead'),(3,'ashutosh','SDE-3');
+ERROR:  syntax error at or near "1"
+LINE 1: insert into values(1,'prajwal','SDE-3'),(2,'aditya','team-le...
+                           ^
+project=# insert into emp(eno,ename,post) values(1,'prajwal','SDE-3'),(2,'aditya','team-lead'),(3,'ashutosh','SDE-3');
+INSERT 0 3
+project=# select * from emp;
+ eno |  ename   |   post    
+-----+----------+-----------
+   1 | prajwal  | SDE-3
+   2 | aditya   | team-lead
+   3 | ashutosh | SDE-3
+(3 rows)
+
+project=# create table project(pno int primary key,pname varchar(50),pduration int,pbudget float);
+CREATE TABLE
+project=# insert into project(pno,pname,pduration,pbudget) values(1,'google-Gen-AI',2190,70000),(2,'youtube-recommend',2500,50000);
+INSERT 0 2
+project=# select * from emp;
+ eno |  ename   |   post    
+-----+----------+-----------
+   1 | prajwal  | SDE-3
+   2 | aditya   | team-lead
+   3 | ashutosh | SDE-3
+(3 rows)
+
+project=# select * from project ;
+ pno |       pname       | pduration | pbudget 
+-----+-------------------+-----------+---------
+   1 | google-Gen-AI     |      2190 |   70000
+   2 | youtube-recommend |      2500 |   50000
+(2 rows)
+
+create table project_emp(pno int references project(pno),eno int references emp(eno),p_hrs_worked int);
+
+insert into project_emp(pno,eno,p_hrs_worked) values
+(1,1,350),
+(1,2,250),
+(1,3,150),
+(2,1,250),
+(2,2,370),
+(2,3,370);
+
+
+project=# create table project_emp(pno int references project(pno),eno int references emp(eno),p_hrs_worked int);
+CREATE TABLE
+project=# insert into project_emp(pno,eno,p_hrs_worked) values
+project-# (1,1,350),
+project-# (1,2,250),
+project-# (1,3,150),
+project-# (2,1,250),
+project-# (2,2,370),
+project-# (2,3,370);
+INSERT 0 6
+project=# select * from project ;
+ pno |       pname       | pduration | pbudget 
+-----+-------------------+-----------+---------
+   1 | google-Gen-AI     |      2190 |   70000
+   2 | youtube-recommend |      2500 |   50000
+(2 rows)
+
+project=# select * from project_emp;
+ pno | eno | p_hrs_worked 
+-----+-----+--------------
+   1 |   1 |          350
+   1 |   2 |          250
+   1 |   3 |          150
+   2 |   1 |          250
+   2 |   2 |          370
+   2 |   3 |          370
+(6 rows)
+
+select project.pname,pbudget,emp.ename,project_emp.p_hrs_worked from project,emp,project_emp where project.pno=project_emp.pno and emp.eno=project_emp.eno and pname='google-Gen-AI';
+
+project=# select project.pname,pbudget,emp.ename,project_emp.p_hrs_worked from project,emp,project_emp where project.pno=project_emp.pno and emp.eno=project_emp.eno and project.pname='google-Gen-AI';
+     pname     | pbudget |  ename   | p_hrs_worked 
+---------------+---------+----------+--------------
+ google-Gen-AI |   70000 | prajwal  |          350
+ google-Gen-AI |   70000 | aditya   |          250
+ google-Gen-AI |   70000 | ashutosh |          150
+(3 rows)
+
+project=# select project.pname,pbudget,emp.ename,project_emp.p_hrs_worked from project,emp,project_emp where project.pno=project_emp.pno and emp.eno=project_emp.eno and pname='google-Gen-AI';
+     pname     | pbudget |  ename   | p_hrs_worked 
+---------------+---------+----------+--------------
+ google-Gen-AI |   70000 | prajwal  |          350
+ google-Gen-AI |   70000 | aditya   |          250
+ google-Gen-AI |   70000 | ashutosh |          150
+(3 rows)
