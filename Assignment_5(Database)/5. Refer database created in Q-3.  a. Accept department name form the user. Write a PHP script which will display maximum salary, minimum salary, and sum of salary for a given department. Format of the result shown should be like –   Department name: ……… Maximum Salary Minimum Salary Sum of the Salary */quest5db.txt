@@ -1,0 +1,99 @@
+create database quest5;
+
+create table emp(eno int primary key,ename varchar(50),post varchar(50),salary float);
+
+
+create table dept(dno int primary key,dname varchar(50));
+
+create table deptEmp(dno int references dept(dno),eno int references emp(eno));
+
+insert into emp(eno,ename,post,salary) values
+(1,'prajwal','head',500000),
+(2,'amit','Engineer',50000),
+(3,'sahil','team-lead',70000),
+(4,'rushi','Engineer',50000),
+(5,'vijay','Engineer',50000);
+
+
+postgres=# create database quest5;
+CREATE DATABASE
+postgres=# \c quest4;
+You are now connected to database "quest4" as user "postgres".
+quest4=# create table emp(eno int primary key,ename varchar(50),post varchar(50),salary float);
+CREATE TABLE
+quest4=# create table dept(dno int primary key,dname varchar(50));
+CREATE TABLE
+quest4=# create table deptEmp(dno int references dept(dno),eno int references emp(eno));
+CREATE TABLE
+quest4=# insert into emp(eno,ename,post,salary) values
+quest4-# (1,'prajwal','head',500000),
+quest4-# (2,'amit','Engineer',50000),
+quest4-# (3,'sahil','team-lead',70000),
+quest4-# (4,'rushi','Engineer',50000),
+quest4-# (5,'vijay','Engineer',50000);
+INSERT 0 5
+quest4=# select * from emp;
+ eno |  ename  |   post    | salary
+-----+---------+-----------+--------
+   1 | prajwal | head      | 500000
+   2 | amit    | Engineer  |  50000
+   3 | sahil   | team-lead |  70000
+   4 | rushi   | Engineer  |  50000
+   5 | vijay   | Engineer  |  50000
+(5 rows)
+
+
+insert into dept(dno,dname) values
+(1,'R&D'),
+(2,'engg');
+
+quest4=# insert into dept(dno,dname) values
+quest4-# (1,'R&D'),
+quest4-# (2,'engg');
+INSERT 0 2
+quest4=# select * from dept;
+ dno | dname
+-----+-------
+   1 | R&D
+   2 | engg
+(2 rows)
+
+insert into deptEmp(dno,eno) values
+(1,1),
+(1,3),
+(2,2),
+(2,4),
+(2,5);
+
+
+quest4=# select * from deptEmp;
+ dno | eno
+-----+-----
+(0 rows)
+
+
+quest4=# insert into deptEmp(dno,eno) values
+quest4-# (1,1),
+quest4-# (1,3),
+quest4-# (2,2),
+quest4-# (2,4),
+quest4-# (2,5);
+INSERT 0 5
+quest4=# select * from deptEmp;
+ dno | eno
+-----+-----
+   1 |   1
+   1 |   3
+   2 |   2
+   2 |   4
+   2 |   5
+(5 rows)
+
+
+quest4=# select dept.dname,max(emp.salary),min(emp.salary),sum(emp.salary) from dept,emp,deptEmp where dept.dno=deptEmp.
+dno and emp.eno=deptEmp.eno and dname='R&D' group by dname;
+ dname |  max   |  min  |  sum
+-------+--------+-------+--------
+ R&D   | 500000 | 70000 | 570000
+(1 row)
+
