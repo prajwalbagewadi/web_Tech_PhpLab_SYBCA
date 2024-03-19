@@ -1,0 +1,69 @@
+6. Doctor (doc_no, doc_name, experience, city, area)
+Hospital (hosp_no, hosp_name, hosp_city)
+Doctor and Hospital are related with many to many relationship with descriptive attribute
+type_of_appointment. (It can be either visiting or working)
+Write a PHP script which accepts experience value from the user and update city to Mumbai for
+all doctors whose experience is less than entered value.
+
+create database hospital;
+
+create table doctor(d_no int primary key,d_name varchar(50),exp int,city varchar(50),area varchar(50));
+
+create table hospital(h_no int primary key,h_name varchar(50),h_city varchar(50));
+
+create table hosp_doc(h_no int references hospital(h_no),d_no int references doctor(dno));
+
+
+create table doctor(d_no int primary key,d_name varchar(50),exp int,city varchar(50),area varchar(50));
+
+create table hospital(h_no int primary key,h_name varchar(50),h_city varchar(50));
+
+create table hosp_doc(h_no int references hospital(h_no),d_no int references doctor(d_no),appointment varchar(50) check(appointment in('visiting','working')));
+
+insert into doctor(d_no,d_name,exp,city,area) values
+(1,'Dr. Sandeep Bhirud',16,'pune','Pimpri-Chinchwad'),
+(2,'Dr. Ankush R. Agrawal',6,'pune','Wakad, Pune'),
+(3,'Dr. Jyoti Bhirud',7,'pune','Pimpri-Chinchwad'),
+(4,'Dr. Priyanka Agrawal',14,'pune','Kalyani Nagar'),
+(5,'Dr. Neha A Agrawal',4,'pune','Wakad, Pune');
+
+select * from doctor;
+
+insert into hospital(h_no,h_name,h_city) values
+(1,'Aditya Birla Memorial Hospital','pune'),
+(2,'Axis Multispeciality Hospital','Mumbai'),
+(3,'National Institute of Ophthalmology','pune'),
+(4,'Life Line Medicare Hospital ','Mumbai'),
+(5,'Surana Hospital & Research Centre ','Mumbai');
+
+select * from hospital;
+
+insert into hosp_doc(h_no,d_no,ap pointment) values
+(1,1,'visiting'),
+(1,2,'working'),
+(3,3,'visiting'),
+(3,4,'working'),
+(3,5'visiting');
+
+create table hosp_doc(h_no int references hospital(h_no),d_no int references doctor(d_no),appointment varchar(50) check(appointment in('visiting','working')));
+
+insert into hosp_doc(h_no,d_no,appointment) values
+(1,1,'visiting'),
+(1,2,'working'),
+(3,3,'visiting'),
+(3,4,'working'),
+(3,5,'visiting');
+
+#update doctor set city='Mumbai' where exp=check(exp < 10);
+
+update doctor set city='Mumbai',area='Mumbai' where exp < 10;
+
+hospital=# select * from doctor;
+ d_no |        d_name         | exp |  city  |       area
+------+-----------------------+-----+--------+------------------
+    1 | Dr. Sandeep Bhirud    |  16 | pune   | Pimpri-Chinchwad
+    4 | Dr. Priyanka Agrawal  |  14 | pune   | Kalyani Nagar
+    2 | Dr. Ankush R. Agrawal |   6 | Mumbai | Mumbai
+    3 | Dr. Jyoti Bhirud      |   7 | Mumbai | Mumbai
+    5 | Dr. Neha A Agrawal    |   4 | Mumbai | Mumbai
+(5 rows)
