@@ -60,4 +60,22 @@ foreach($obj as $t){
 }
 $xml->asXML("Teacher.xml");
 echo "<h1>XML Doc created Successful.</h1>"."<br>";
+
+/*
+  
+// Adding child named "institution"  
+// and valued "geeksforgeeks" 
+
+$xml->addChild("institution", "geeksforgeeks"); 
+
+  
+// Adding attribute named "type" and value 
+// "educational" in institution element. 
+
+$xml->institution->addAttribute("type", "educational"); 
+
+  
+
+
+*/
 ?>
